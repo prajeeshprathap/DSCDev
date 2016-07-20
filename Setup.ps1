@@ -9,6 +9,11 @@ Configuration Setup
         {
 
         }
+
+        iChocoPackage 7Zip
+        {
+            Name = '7zip.install'
+        }
     }
 }
 

@@ -1,2 +1,8 @@
 localhost.mof
 gitcommands
+bin/
+obj/
+packages/
+*.csproj.user
+*.suo
+.vs/
