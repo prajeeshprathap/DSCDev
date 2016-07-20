@@ -4,10 +4,10 @@ A sample on how a windows development environment can be configured using PowerS
 
 ## Installation
 
-git clone https://github.com/prajeeshprathap/DSCDev.git
-.\LCMSettings.ps1
-.\Bootstrap.ps1
-.\Setup.ps1
+git clone https://github.com/prajeeshprathap/DSCDev.git <br />
+.\LCMSettings.ps1 <br />
+.\Bootstrap.ps1 <br />
+.\Setup.ps1 <br />
 
 ## Contributors
 
