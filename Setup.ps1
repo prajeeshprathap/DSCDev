@@ -14,6 +14,12 @@ Configuration Setup
         {
             Name = '7zip.install'
         }
+
+        iChocoPackage IISExpressGui
+        {
+            Name = 'iisexpressgui'
+            Source = 'http://localhost:8085/nuget'
+        }
     }
 }
 
