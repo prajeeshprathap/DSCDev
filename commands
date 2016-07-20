@@ -1,0 +1,1 @@
+New-ModuleManifest -path 'C:\Program Files\WindowsPowerShell\Modules\BootstrapDSCDev\BootstrapDSCDev.psd1'
