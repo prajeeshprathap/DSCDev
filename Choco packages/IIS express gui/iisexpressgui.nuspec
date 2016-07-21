@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>iisexpressgui</id>
+    <version>1.2.1</version>
+    <authors>Prajeesh Prathap</authors>
+    <owners>Prajeesh Prathap</owners>
+    <licenseUrl>http://www.infosuppot.com/</licenseUrl>
+    <projectUrl>http://www.infosuppot.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Downloads and stores the iis express gui manager</description>
+    <releaseNotes>Downloads and stores the iis express gui manager.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>iisexpress, endeavour</tags>
+  </metadata>
+</package>
