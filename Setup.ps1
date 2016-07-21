@@ -20,6 +20,41 @@ Configuration Setup
             Name = 'iisexpressgui'
             Source = 'http://localhost:8085/nuget'
         }
+
+        iChocoPackage Pester
+        {
+            Name = 'Pester'
+        }
+
+        iChocoPackage NetFX40
+        {
+            Name = 'DotNet4.0'
+        }
+
+        iChocoPackage NetFX45
+        {
+            Name = 'DotNet4.5'
+        }
+
+        iChocoPackage AdobeDigitalEditions
+        {
+            Name = 'adobedigitaleditions'
+        }
+
+        iChocoPackage ILSpy
+        {
+            Name = 'ilspy'
+        }
+
+        iChocoPackage NCrunch
+        {
+            Name = 'ncrunch-vs2015'
+        }
+
+        iChocoPackage PickPick
+        {
+            Name = 'picpick.portable'
+        }
     }
 }
 
