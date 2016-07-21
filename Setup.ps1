@@ -41,6 +41,17 @@ Configuration Setup
             Name = 'adobedigitaleditions'
         }
 
+        iChocoPackage AdobeReaderDC
+        {
+            Name = 'adobereader'
+        }
+
+        iChocoPackage EnterpriseArchitectLite
+        {
+            Name = 'ealite'
+            Source = 'http://endeavourchoco.azurewebsites.net/nuget'
+        }
+
         iChocoPackage ILSpy
         {
             Name = 'ilspy'
@@ -55,6 +66,23 @@ Configuration Setup
         {
             Name = 'picpick.portable'
         }
+
+        iChocoPackage NotePadPlusPlus
+        {
+            Name = 'notepadplusplus'
+        }
+
+        iChocoPackage HipChat
+        {
+            Name = 'hipchat'
+        }
+
+        #WindowsFeature DesktopExperience
+        #{
+        #    Name = 'Desktop-Experience'
+        #    Ensure = 'Present'
+        #    IncludeAllSubFeature = $true
+        #}
     }
 }
 
