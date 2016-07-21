@@ -36,6 +36,10 @@ if ($packageParameters)
     } 
 } 
 
-Write-Verbose "IISExpress unzip location will be used as $path"
+Write-Verbose "IISExpress location to be cleaned will be used as $path"
 
-Install-ChocolateyZipPackage -PackageName 'iisexpressgui' -Url 'http://downloads.sourceforge.net/project/iisexpressgui/IISExpressGUIv1.0.zip?r=&ts=1469080716&use_mirror=master' -UnzipLocation $path
+if(Test-Path $path -ErrorAction SilentlyContinue)
+{
+    Remove-Item -Recurse -Force -Path $path
+    Write-ChocolateySuccess 'iisexpressgui'
+}
