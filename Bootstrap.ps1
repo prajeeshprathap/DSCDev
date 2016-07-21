@@ -34,6 +34,25 @@ Configuration Bootstrap
 			SourcePath = Join-Path $Path 'DSCResources'
 			DestinationPath = Join-Path $DscModulePath 'EndeavourWinDev\DSCResources'
 		}
+
+		Script xWindowsUpdate 
+		{
+			GetScript = {
+				return @{
+                    GetScript = $GetScript
+                    SetScript = $SetScript
+                    TestScript = $TestScript
+                    Result = Get-Package xWindowsUpdate -ErrorAction SilentlyContinue
+                }
+			}
+			TestScript = {
+				$installed = Get-Package xWindowsUpdate -ErrorAction SilentlyContinue
+				return ($installed -ne $null)
+			}
+			SetScript = {
+				Install-Package xWindowsUpdate
+			}
+		}
     }   
 }
 

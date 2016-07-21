@@ -1,7 +1,7 @@
 Configuration Setup
 {
     Import-DscResource -Module EndeavourWinDev
-    write-output 'done'
+    Import-DscResource -ModuleName xWindowsUpdate
 
     node localhost
     {
@@ -70,11 +70,18 @@ Configuration Setup
         iChocoPackage NotePadPlusPlus
         {
             Name = 'notepadplusplus'
+            Ensure = 'Absent'
         }
 
         iChocoPackage HipChat
         {
             Name = 'hipchat'
+            Ensure = 'Absent'
+        }
+
+        iChocoPackage VisualStudioCode
+        {
+            Name = 'visualstudiocode'
         }
 
         #WindowsFeature DesktopExperience
@@ -83,6 +90,15 @@ Configuration Setup
         #    Ensure = 'Present'
         #    IncludeAllSubFeature = $true
         #}
+
+        xWindowsUpdateAgent MuSecurityImportant
+        {
+            IsSingleInstance = 'Yes'
+            UpdateNow        = $true
+            Category         = @('Security','Important')
+            Source           = 'MicrosoftUpdate'
+            Notifications    = 'Disabled'
+        }
     }
 }
 
