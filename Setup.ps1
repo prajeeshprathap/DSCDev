@@ -49,7 +49,9 @@ Configuration Setup
         iChocoPackage EnterpriseArchitectLite
         {
             Name = 'ealite'
+            Version = '1.1.4'
             Source = 'http://endeavourchoco.azurewebsites.net/nuget'
+            Ensure = 'Absent'
         }
 
         iChocoPackage ILSpy
