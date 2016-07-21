@@ -84,6 +84,12 @@ Configuration Setup
             Name = 'visualstudiocode'
         }
 
+        iChocoPackage VSCommunity
+        {
+            Name = 'visualstudio2015community'
+            Ensure = 'Absent' 
+        }
+
         #WindowsFeature DesktopExperience
         #{
         #    Name = 'Desktop-Experience'
