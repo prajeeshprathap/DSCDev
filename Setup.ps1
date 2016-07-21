@@ -18,7 +18,7 @@ Configuration Setup
         iChocoPackage IISExpressGui
         {
             Name = 'iisexpressgui'
-            Source = 'http://localhost:8085/nuget'
+            Source = 'http://endeavourchoco.azurewebsites.net/nuget'
         }
 
         iChocoPackage Pester
