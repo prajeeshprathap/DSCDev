@@ -25,13 +25,24 @@ Describe "Validate machine is in desired state after applying the configuration"
     It "Chocolatey is installed and available on the machine"{
         Test-Path "C:\ProgramData\chocolatey\bin\choco.exe" -ErrorAction SilentlyContinue | Should Be $true
     }
-
+    
     $installedPackages = choco list -lo
 
+    It "Automatically installs Visual Studio Code" {
+        $installedPackages |? {$_ -like "visualstudiocode*"} | Should Match "visualstudiocode"
+    }
+    It "Automatically installs Visual Studio 2015" {
+        $installedPackages |? {$_ -like "vs2015*"} | Should BeNullOrEmpty
+    }
+    It "Automatically installs Enterprise Architect Lite" {
+        $installedPackages |? {$_ -like "ealite*"} | Should BeNullOrEmpty
+    }
+    It "Automatically installs IL Spy" {
+        $installedPackages |? {$_ -like "ilspy*"} | Should Match "ilspy"
+    }
     It "7Zip should be installed" {
         $installedPackages |? {$_ -like "7Zip*"} | Should Match "7Zip"
     }
-
     It "Automatically installs Adobe digital editions" {
         $installedPackages |? {$_ -like "adobedigitaleditions*"} | Should Match "adobedigitaleditions"
     }
@@ -59,19 +70,7 @@ Describe "Validate machine is in desired state after applying the configuration"
     It "Automatically installs fiddler" {
         $installedPackages |? {$_ -like "fiddler*"} | Should Match "fiddler"
     }
-    It "Automatically installs Enterprise Architect Lite" {
-        $installedPackages |? {$_ -like "ealite*"} | Should BeNullOrEmpty
-    }
-    It "Automatically installs IL Spy" {
-        $installedPackages |? {$_ -like "ilspy*"} | Should Match "ilspy"
-    }
     It "Automatically installs PicPick" {
         $installedPackages |? {$_ -like "picpick.portable*"} | Should Match "picpick.portable"
-    }
-    It "Automatically installs Visual Studio Code" {
-        $installedPackages |? {$_ -like "visualstudiocode*"} | Should Match "visualstudiocode"
-    }
-    It "Automatically installs Visual Studio 2015" {
-        $installedPackages |? {$_ -like "vs2015*"} | Should BeNullOrEmpty
     }
 }
