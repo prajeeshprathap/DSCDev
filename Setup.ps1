@@ -92,21 +92,19 @@ Configuration Setup
             Ensure = 'Absent' 
         }
 
+        iChocoPackage SystemCenter2012EndpointProtection
+        {
+            Name = 'scep'
+            Ensure = 'Present' 
+            Source = 'http://endeavourchoco.azurewebsites.net/nuget'
+        }
+
         #WindowsFeature DesktopExperience
         #{
         #    Name = 'Desktop-Experience'
         #    Ensure = 'Present'
         #    IncludeAllSubFeature = $true
         #}
-
-        xWindowsUpdateAgent MuSecurityImportant
-        {
-            IsSingleInstance = 'Yes'
-            UpdateNow        = $true
-            Category         = @('Security','Important')
-            Source           = 'MicrosoftUpdate'
-            Notifications    = 'Disabled'
-        }
     }
 }
 

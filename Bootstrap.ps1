@@ -42,7 +42,7 @@ Configuration Bootstrap
                     GetScript = $GetScript
                     SetScript = $SetScript
                     TestScript = $TestScript
-                    Result = Get-Package xWindowsUpdate -ErrorAction SilentlyContinue
+                    Result = (Get-Package xWindowsUpdate -ErrorAction SilentlyContinue) -ne $null
                 }
 			}
 			TestScript = {
@@ -50,7 +50,27 @@ Configuration Bootstrap
 				return ($installed -ne $null)
 			}
 			SetScript = {
-				Install-Package xWindowsUpdate
+				Install-Package xWindowsUpdate -Confirm$false
+			}
+		}
+
+		Script AzureResourceManagerModule 
+		{
+			GetScript = {
+				return @{
+                    GetScript = $GetScript
+                    SetScript = $SetScript
+                    TestScript = $TestScript
+                    Result = (Get-Command -Name Get-AzureRMResource -ErrorAction SilentlyContinue) -ne $null
+                }
+			}
+			TestScript = {
+				$installed =  Get-Command -Name Get-AzureRMResource -ErrorAction SilentlyContinue
+				return ($installed -ne $null)
+			}
+			SetScript = {
+				Install-Module AzureRM -Confirm:$false
+				Install-Module Azure -Confirm:$false
 			}
 		}
     }   
