@@ -1,7 +1,7 @@
 [DSCLocalConfigurationManager()]
 configuration PullClientConfiguration
 {
-    Node localhost
+    node localhost
     {
         Settings
         {
@@ -26,4 +26,4 @@ configuration PullClientConfiguration
 }
 
 PullClientConfiguration
-Start-DscConfiguration .\PullClientConfiguration -Wait -Verbose
+Start-DscConfiguration -Path .\PullClientConfiguration -Wait -Verbose
