@@ -8,6 +8,7 @@ configuration PullClientConfiguration
             RefreshMode          = 'Pull'
             RefreshFrequencyMins = 30 
             RebootNodeIfNeeded   = $true
+            ConfigurationID = "1cd8a349-ff19-4ca4-94ae-3e3e1367a514"
         }
 
         ConfigurationRepositoryWeb EndeavourPullServer

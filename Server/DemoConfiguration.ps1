@@ -1,6 +1,6 @@
 configuration PullClientDemoConfiguration
 {
-    node c944ce11-0ffe-467b-bb22-fd1cd2fd76bc
+    node 1cd8a349-ff19-4ca4-94ae-3e3e1367a514
     {
         File TestFile
         {
