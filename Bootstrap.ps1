@@ -73,6 +73,25 @@ Configuration Bootstrap
 				Install-Module Azure -Confirm:$false
 			}
 		}
+
+		Script PSDesiredStateConfigurationModule 
+		{
+			GetScript = {
+				return @{
+                    GetScript = $GetScript
+                    SetScript = $SetScript
+                    TestScript = $TestScript
+                    Result = (Get-Command -Name Get-xPSDesiredStateConfiguration -ErrorAction SilentlyContinue) -ne $null
+                }
+			}
+			TestScript = {
+				$installed =  Get-Command -Name xPSDesiredStateConfiguration -ErrorAction SilentlyContinue
+				return ($installed -ne $null)
+			}
+			SetScript = {
+				Install-Module xPSDesiredStateConfiguration -Confirm:$false
+			}
+		}
     }   
 }
 
