@@ -50,7 +50,7 @@ Configuration Bootstrap
 				return ($installed -ne $null)
 			}
 			SetScript = {
-				Install-Package xWindowsUpdate -Confirm$false
+				Install-Package xWindowsUpdate -Confirm:$false
 			}
 		}
 
