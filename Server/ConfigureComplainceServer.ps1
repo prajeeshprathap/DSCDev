@@ -18,7 +18,8 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
     Install-Module -Name xPSDesiredStateConfiguration -Confirm:$false -Verbose
 }
 
-.\DSCComplainceServer.ps1 -NodeName 'localhost'
+$registrationKey = '62f25315-62f1-47eb-a091-fc1f7b70f40e'
+.\DSCComplainceServer.ps1 -NodeName 'localhost' -Key $registrationKey
 
 Set-DscLocalConfigurationManager -Path .\ComplainceServerConfiguration -Verbose -Force
 Start-DscConfiguration .\ComplainceServerConfiguration -Verbose -Force
