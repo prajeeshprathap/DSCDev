@@ -11,7 +11,6 @@ configuration PullClientConfiguration
             RefreshMode          = 'Pull';
             RefreshFrequencyMins = 30 ;
             RebootNodeIfNeeded   = $true;
-            #ConfigurationID = '1cd8a349-ff19-4ca4-94ae-3e3e1367a514'
         }
 
         #specifies an HTTP pull server for configurations
@@ -19,7 +18,7 @@ configuration PullClientConfiguration
         {
             ServerURL          = 'http://52.174.151.121/psdscpullserver.svc/';
             RegistrationKey    = 'c944ce11-0ffe-467b-bb22-fd1cd2fd76bc';
-            AllowUnsecureConnection = $true; #This needs to be fixed in the future.;
+            AllowUnsecureConnection = $true;
             ConfigurationNames = @("WindowsDevMachine")
         }
 
@@ -28,7 +27,7 @@ configuration PullClientConfiguration
         {
             ServerURL          = 'http://52.174.151.121/psdscpullserver.svc/';
             RegistrationKey    = 'c944ce11-0ffe-467b-bb22-fd1cd2fd76bc';
-            AllowUnsecureConnection = $true; #This needs to be fixed in the future.;
+            AllowUnsecureConnection = $true;
         }
 
         #specifies an HTTP pull server to which reports are sent
@@ -36,7 +35,7 @@ configuration PullClientConfiguration
         {
             ServerURL          = 'http://52.174.149.167/psdscpullserver.svc/';
             RegistrationKey    = '62f25315-62f1-47eb-a091-fc1f7b70f40e';
-            AllowUnsecureConnection = $true; #This needs to be fixed in the future.;
+            AllowUnsecureConnection = $true;
         }
     }
 }

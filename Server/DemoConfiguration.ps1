@@ -1,15 +1,15 @@
-configuration PullClientDemoConfiguration
+configuration WindowsDevMachineConfiguration
 {
-    node 1cd8a349-ff19-4ca4-94ae-3e3e1367a514
+    node WindowsDevMachine
     {
         File TestFile
         {
             Ensure          = 'Present'
             Type            = 'File'
-            DestinationPath = "$env:windir\Temp\DSCPullTest.txt"
-            Contents        = "Hello world DSC pull demo"
+            DestinationPath = "$env:windir\Temp\DSCPullTest_ConfigName.txt"
+            Contents        = "The demo works if you see this"
         }
     }
 }
 
-PullClientDemoConfiguration
+WindowsDevMachineConfiguration
