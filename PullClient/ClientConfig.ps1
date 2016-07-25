@@ -11,6 +11,7 @@ configuration PullClientConfiguration
             RefreshMode          = 'Pull';
             RefreshFrequencyMins = 30 ;
             RebootNodeIfNeeded   = $true;
+            DebugMode = $true;
         }
 
         #specifies an HTTP pull server for configurations
