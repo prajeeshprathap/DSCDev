@@ -13,6 +13,7 @@ Configuration PullServerConfiguration
         LocalConfigurationManager
         {
             ConfigurationMode = 'ApplyAndAutoCorrect'
+            RefreshMode = 'Push'
             RebootNodeifNeeded = $node.RebootNodeifNeeded
         }
 
