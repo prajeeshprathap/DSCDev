@@ -2,26 +2,46 @@ configuration DSCPullServerConfiguration
 {
     Import-DSCResource -ModuleName xPSDesiredStateConfiguration 
 
-     Node localhost 
+     Node $Computer 
      { 
-         WindowsFeature DSCServiceFeature 
-         { 
-             Ensure = 'Present'
-             Name   = 'DSC-Service'             
-         } 
+        WindowsFeature DSCServiceFeature 
+        { 
+            Ensure = 'Present'
+            Name   = 'DSC-Service'             
+        } 
 
-         xDscWebService PSDSCPullServer 
-         { 
-             Ensure                  = 'Present' 
-             EndpointName            = 'DSCPullServer' 
-             Port                    = 8080
-             PhysicalPath            = "$env:SystemDrive\inetpub\DSCPullServer" 
-             CertificateThumbPrint   = 'AllowUnencryptedTraffic'       
-             ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules" 
-             ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration" 
-             State                   = 'Started'
-             DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
-         } 
+        #Needed from complaince server
+        WindowsFeature WebWindowsAuth 
+        {
+            Ensure = "Present"
+            Name   = "web-Windows-Auth"
+            Dependson = "[WindowsFeature]DSCServiceFeature"
+        }
+
+        xDscWebService PSDSCPullServer 
+        { 
+            Ensure                  = 'Present' 
+            EndpointName            = 'DSCPullServer' 
+            Port                    = 8080
+            PhysicalPath            = "$env:SystemDrive\inetpub\DSCPullServer" 
+            CertificateThumbPrint   = 'AllowUnencryptedTraffic'       
+            ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules" 
+            ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration" 
+            State                   = 'Started'
+            DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
+        } 
+         
+        #xDscWebService PSDSCComplianceServer  
+        #{
+        #   Ensure                  = "Present" 
+        #   EndpointName            = "PSDSCComplianceServer" 
+        #   Port                    =  9080
+        #   PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\PSDSCComplianceServer"
+        #   CertificateThumbPrint   = "AllowUnencryptedTraffic" 
+        #   State                   = "Started" 
+        #   IsComplianceServer      = $true 
+        #   DependsOn               = @("[WindowsFeature]DSCServiceFeature","[xDSCWebService]PSDSCPullServer")  
+        #}
 
         File RegistrationKeyFile
         {
@@ -34,4 +54,13 @@ configuration DSCPullServerConfiguration
 }
 
 DSCPullServerConfiguration
-Start-DSCConfiguration -Path .\DSCPullServerConfiguration -Wait -Verbose
+
+$ConfigParameters = @{
+    Path = ".\DSCPullServerConfiguration"
+    Computer = 'localhost'
+    Wait = $True
+    Verbose = $True
+    Force = $True
+}
+
+Start-DSCConfiguration $ConfigParameters  
