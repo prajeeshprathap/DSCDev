@@ -32,4 +32,4 @@ configuration PullClientConfiguration
 }
 
 PullClientConfiguration
-Set-DscLocalConfigurationManager -Path .\PullClientConfiguration -Verbose
+Set-DscLocalConfigurationManager -Path .\PullClientConfiguration -Verbose -Force 
