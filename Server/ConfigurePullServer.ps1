@@ -21,5 +21,5 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 
 .\DSCPullServer.ps1 -NodeName 'localhost'
 
-Set-DscLocalConfigurationManager -ComputerName localhost -Path .\PullServerConfiguration -Verbose -Force
+Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force -Wait
 Start-DscConfiguration .\PullServerConfiguration -Verbose -Force
