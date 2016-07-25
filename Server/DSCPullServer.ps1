@@ -49,7 +49,7 @@ $ConfigParameters = @{
     AllNodes = @(
             @{
                 NodeName = 'localhost'
-                Port = 80
+                Port = 8080
                 RegistrationKey = 'c944ce11-0ffe-467b-bb22-fd1cd2fd76bc'
                 RebootNodeifNeeded = $true
             }
