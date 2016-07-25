@@ -18,10 +18,7 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
     Install-Module -Name xPSDesiredStateConfiguration -Confirm:$false -Verbose
 }
 
-#Use [Guid]::NewGuid() | select -ExpandProperty Guid to generate a new key and paste the key here
-$registrationKey = 'c944ce11-0ffe-467b-bb22-fd1cd2fd76bc'
+.\DSCComplainceServer.ps1 -NodeName 'localhost'
 
-.\DSCPullServer.ps1 -NodeName 'localhost' -Key $registrationKey
-
-Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force
-Start-DscConfiguration .\PullServerConfiguration -Verbose -Force
+Set-DscLocalConfigurationManager -Path .\ComplainceServerConfiguration -Verbose -Force
+Start-DscConfiguration .\ComplainceServerConfiguration -Verbose -Force

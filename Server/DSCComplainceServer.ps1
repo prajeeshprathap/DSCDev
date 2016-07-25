@@ -7,7 +7,7 @@ param
     [String] $Key
 )
 
-Configuration PullServerConfiguration
+Configuration ComplainceServerConfiguration
 {
     Import-DSCResource -ModuleName xPSDesiredStateConfiguration 
 
@@ -26,17 +26,14 @@ Configuration PullServerConfiguration
             Name   = 'DSC-Service'           
         } 
 
-        xDscWebService PullServer 
-        { 
-            Ensure                  = 'Present';
-            EndpointName            = 'PullServer';
-            Port                    = $Node.Port;
-            PhysicalPath            = "$env:SystemDrive\inetpub\PullServer";
-            CertificateThumbPrint   = 'AllowUnencryptedTraffic';
-            ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules";
-            ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration";
-            State                   = 'Started'
-            DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
+        xDscWebService ComplainceServer  
+        {
+            Ensure                  = "Present" 
+            EndpointName            = "ComplainceServer" 
+            Port                    =  $Node.Port
+            PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\ComplainceServer"
+            CertificateThumbPrint   = "AllowUnencryptedTraffic" 
+            State                   = "Started" 
         }
 
         File RegistrationKeyFile
@@ -61,4 +58,4 @@ $ConfigParameters = @{
     }
 
 
-PullServerConfiguration -ConfigurationData $ConfigParameters
+ComplainceServerConfiguration -ConfigurationData $ConfigParameters
