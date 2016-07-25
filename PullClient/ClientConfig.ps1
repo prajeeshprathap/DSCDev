@@ -9,7 +9,7 @@ configuration PullClientConfiguration
             ConfigurationMode = 'ApplyAndAutoCorrect';
             ConfigurationModeFrequencyMins = 60;
             RefreshMode          = 'Pull';
-            RefreshFrequencyMins = 15 ;
+            RefreshFrequencyMins = 30 ;
             RebootNodeIfNeeded   = $true;
             ConfigurationID = '1cd8a349-ff19-4ca4-94ae-3e3e1367a514'
         }
