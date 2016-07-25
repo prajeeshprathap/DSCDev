@@ -9,3 +9,4 @@ packages/
 *.pubxml*
 *.nupkg
 System center*/
+localhost.meta.mof
