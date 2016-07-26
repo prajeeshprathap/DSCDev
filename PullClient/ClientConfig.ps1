@@ -40,7 +40,20 @@ configuration PullClientConfiguration
             ServerURL          = $Node.ConfigServer;
             RegistrationKey    = $Node.ConfigServerKey;
             AllowUnsecureConnection = $true;
-            ConfigurationNames = @("WindowsDevMachine")
+            ConfigurationNames = @("BaseModuleConfiguration", "ChocoPackageConfiguration")
+        }
+
+        PartialConfiguration BaseModuleConfiguration 
+        {
+            Description                     = "BaseModuleConfiguration"
+            ConfigurationSource             = @("[ConfigurationRepositoryWeb]DSCConfigurationServer") 
+        }
+
+        PartialConfiguration ChocoPackageConfiguration
+        {
+            Description                     = "ChocoPackageConfiguration"
+            ConfigurationSource             = @("[ConfigurationRepositoryWeb]DSCConfigurationServer")
+            DependsOn                       = '[PartialConfiguration]BaseModuleConfiguration'
         }
 
         #specifies an HTTP pull server for modules
