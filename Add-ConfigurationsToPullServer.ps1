@@ -2,10 +2,12 @@ $tempConfigPath = Join-Path $env:TEMP "PullConfigurations"
 if(-not(Test-Path $tempConfigPath -ErrorAction SilentlyContinue)){
     New-Item -ItemType Directory -Force $tempConfigPath
 }
-.\BaseModuleConfig -Path $tempConfigPath
-.\ChocoPackageConfig -Path $tempConfigPath
+
 $baseConfigFolder = Join-Path $tempConfigPath 'BaseModuleConfiguration'
 $chocoConfigFolder = Join-Path $tempConfigPath 'ChocoPackageConfiguration'
+
+.\BaseModuleConfig -Path $baseConfigFolder
+.\ChocoPackageConfig -Path $chocoConfigFolder
 
 "Creating checksum file at location $baseConfigFolder" | Write-Host
 New-DscChecksum -ConfigurationPath $baseConfigFolder -OutPath $baseConfigFolder -Verbose -Force
