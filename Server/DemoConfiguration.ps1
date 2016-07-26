@@ -1,3 +1,9 @@
+param
+(
+    [Parameter(Mandatory)]
+    [string] $Path
+)
+
 configuration WindowsDevMachineConfiguration
 {
     node WindowsDevMachine
@@ -12,4 +18,4 @@ configuration WindowsDevMachineConfiguration
     }
 }
 
-WindowsDevMachineConfiguration
+WindowsDevMachineConfiguration -OutputPath $Path
