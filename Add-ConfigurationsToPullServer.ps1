@@ -2,8 +2,8 @@ $tempConfigPath = Join-Path $env:TEMP "PullConfigurations"
 if(-not(Test-Path $tempConfigPath -ErrorAction SilentlyContinue)){
     New-Item -ItemType Directory -Force $tempConfigPath
 }
-.\BaseModuleConfig.ps1 -Path $tempConfigPath
-.\ChocoPackageConfig.ps1 -Path $tempConfigPath
+.\BaseModuleConfig -Path $tempConfigPath
+.\ChocoPackageConfig -Path $tempConfigPath
 $baseConfigFolder = Join-Path $tempConfigPath 'BaseModuleConfiguration'
 $chocoConfigFolder = Join-Path $tempConfigPath 'ChocoPackageConfiguration'
 
