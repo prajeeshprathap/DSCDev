@@ -3,8 +3,8 @@ if(-not(Test-Path $tempConfigPath -ErrorAction SilentlyContinue)){
     New-Item -ItemType Directory -Force $tempConfigPath
 }
 
-$baseConfigFolder = Join-Path $tempConfigPath 'BaseModuleConfiguration'
-$chocoConfigFolder = Join-Path $tempConfigPath 'ChocoPackageConfiguration'
+$baseConfigFolder = Join-Path $tempConfigPath 'BaseConfig'
+$chocoConfigFolder = Join-Path $tempConfigPath 'ChocoConfig'
 
 .\BaseModuleConfig -Path $baseConfigFolder
 .\ChocoPackageConfig -Path $chocoConfigFolder

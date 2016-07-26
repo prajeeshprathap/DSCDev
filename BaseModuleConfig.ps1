@@ -4,7 +4,7 @@ param
     [string] $Path
 )
 
-configuration BaseModuleConfiguration
+configuration BaseConfig
 {
     Node BaseConfig
     {	
@@ -76,4 +76,4 @@ configuration BaseModuleConfiguration
     }
 }
 
-BaseModuleConfiguration -OutputPath $Path
+BaseConfig -OutputPath $Path

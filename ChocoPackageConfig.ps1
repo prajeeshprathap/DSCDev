@@ -4,7 +4,7 @@ param
     [string] $Path
 )
 
-configuration ChocoPackageConfiguration
+configuration ChocoConfig
 {
     Import-DscResource -Module CChoco
 
@@ -122,4 +122,4 @@ configuration ChocoPackageConfiguration
     }
 }
 
-ChocoPackageConfiguration -OutputPath $Path
+ChocoConfig -OutputPath $Path
