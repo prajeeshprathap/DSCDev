@@ -40,20 +40,20 @@ configuration PullClientConfiguration
             ServerURL          = $Node.ConfigServer;
             RegistrationKey    = $Node.ConfigServerKey;
             AllowUnsecureConnection = $true;
-            ConfigurationNames = @("BaseModuleConfiguration", "ChocoPackageConfiguration")
+            ConfigurationNames = @("BaseConfig", "ChocoConfig")
         }
 
-        PartialConfiguration BaseModuleConfiguration 
+        PartialConfiguration BaseConfig 
         {
-            Description                     = "BaseModuleConfiguration"
-            ConfigurationSource             = @("[ConfigurationRepositoryWeb]DSCConfigurationServer") 
+            Description = "BaseConfig"
+            ConfigurationSource = @("[ConfigurationRepositoryWeb]DSCConfigurationServer") 
         }
 
-        PartialConfiguration ChocoPackageConfiguration
+        PartialConfiguration ChocoConfig
         {
-            Description                     = "ChocoPackageConfiguration"
-            ConfigurationSource             = @("[ConfigurationRepositoryWeb]DSCConfigurationServer")
-            DependsOn                       = '[PartialConfiguration]BaseModuleConfiguration'
+            Description = "ChocoConfig"
+            ConfigurationSource = @("[ConfigurationRepositoryWeb]DSCConfigurationServer")
+            DependsOn = '[PartialConfiguration]BaseConfig'
         }
 
         #specifies an HTTP pull server for modules

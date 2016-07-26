@@ -6,7 +6,7 @@ param
 
 configuration BaseModuleConfiguration
 {
-    Node localhost
+    Node BaseConfig
     {	
 		Registry DisableLUA
 		{

@@ -8,7 +8,7 @@ configuration ChocoPackageConfiguration
 {
     Import-DscResource -Module CChoco
 
-    Node localhost
+    Node ChocoConfig
     {	
 		cChocoInstaller InstallChocolatey
         {
