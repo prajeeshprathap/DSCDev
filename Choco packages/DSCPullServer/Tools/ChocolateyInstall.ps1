@@ -8,7 +8,8 @@ $packageParameters = $env:chocolateyPackageParameters
 
 $ErrorActionPreference = 'Stop'
 # Default the values
-$port = 8080
+$pullserverport = 8080
+$reportserverport = 9090
 $key = [Guid]::NewGuid() | select -expand Guid
 
 
@@ -50,10 +51,16 @@ if ($packageParameters)
         throw "Package Parameters were found but were invalid (REGEX Failure)"
     }
 
-    if ($arguments.ContainsKey("Port")) 
+    if ($arguments.ContainsKey("PullServerPort")) 
     {
-        $portValue = $arguments["Port"]
-        $port = [System.Convert]::ToInt32($portValue)
+        $portValue = $arguments["PullServerPort"]
+        $pullserverport = [System.Convert]::ToInt32($portValue)
+    }
+
+    if ($arguments.ContainsKey("ReportServerPort")) 
+    {
+        $portValue = $arguments["ReportServerPort"]
+        $reportserverport = [System.Convert]::ToInt32($portValue)
     }
 
     if ($arguments.ContainsKey("Key")) 
@@ -94,7 +101,7 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 $currentFolder = Split-Path -parent $MyInvocation.MyCommand.Definition
 
 $scriptPath = Join-Path $currentFolder "InstallConfiguration.ps1"
-$argumentList = "-NodeName 'localhost' -Key $key -Port $Port"
+$argumentList = "-NodeName 'localhost' -Key $key -PullServerPort $pullserverport -ReportServerPort $reportserverport"
 Invoke-Expression "& `"$scriptPath`" $argumentList"
 
 Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force

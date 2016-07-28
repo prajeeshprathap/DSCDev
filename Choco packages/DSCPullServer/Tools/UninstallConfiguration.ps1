@@ -5,7 +5,11 @@ param
 
     [Parameter(Mandatory)]
     [ValidateNotNull()]
-    [int] $Port
+    [int] $PullServerPort,
+
+    [Parameter(Mandatory)]
+    [ValidateNotNull()]
+    [int] $ReportServerPort
 )
 
 Configuration RemovePullConfiguration
@@ -18,12 +22,22 @@ Configuration RemovePullConfiguration
         { 
             Ensure                  = 'Absent';
             EndpointName            = 'PullServer';
-            Port                    = $Node.Port;
+            Port                    = $Node.PullServerPort;
             PhysicalPath            = "$env:SystemDrive\inetpub\PullServer";
             CertificateThumbPrint   = 'AllowUnencryptedTraffic';
             ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules";
             ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration";
             State                   = 'Started'                  
+        }
+
+        xDscWebService ReportServer  
+        {
+            Ensure                  = "Absent" 
+            EndpointName            = "ReportServer" 
+            Port                    =  $Node.ReportServerPort
+            PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\ReportServer"
+            CertificateThumbPrint   = "AllowUnencryptedTraffic" 
+            State                   = "Started" 
         }
 
         File RegistrationKeyFile
@@ -45,7 +59,8 @@ $ConfigParameters = @{
     AllNodes = @(
             @{
                 NodeName = 'localhost'
-                Port = $Port
+                PullServerPort = $PullServerPort
+                ReportServerPort = $ReportServerPort
                 RebootNodeifNeeded = $true
             }
         )

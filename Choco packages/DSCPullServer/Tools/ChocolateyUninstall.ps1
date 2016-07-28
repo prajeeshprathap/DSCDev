@@ -8,7 +8,8 @@ $packageParameters = $env:chocolateyPackageParameters
 
 $ErrorActionPreference = 'Stop'
 # Default the values
-$port = 8080
+$pullserverport = 8080
+$reportserverport = 9090
 
 
 # Now parse the packageParameters using good old regular expression
@@ -32,10 +33,16 @@ if ($packageParameters)
         throw "Package Parameters were found but were invalid (REGEX Failure)"
     }
 
-    if ($arguments.ContainsKey("Port")) 
+    if ($arguments.ContainsKey("PullServerPort")) 
     {
-        $portValue = $arguments["Port"]
-        $port = [System.Convert]::ToInt32($portValue)
+        $portValue = $arguments["PullServerPort"]
+        $pullserverport = [System.Convert]::ToInt32($portValue)
+    }
+
+    if ($arguments.ContainsKey("ReportServerPort")) 
+    {
+        $portValue = $arguments["ReportServerPort"]
+        $reportserverport = [System.Convert]::ToInt32($portValue)
     }
 } 
 
@@ -57,7 +64,7 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 $currentFolder = Split-Path -parent $MyInvocation.MyCommand.Definition
 
 $scriptPath = Join-Path $currentFolder "UninstallConfiguration.ps1"
-$argumentList = "-NodeName 'localhost' -Port $Port"
+$argumentList = "-NodeName 'localhost' -PullServerPort $pullserverport -ReportServerPort $reportserverport"
 Invoke-Expression "& `"$scriptPath`" $argumentList"
 
 Start-DscConfiguration .\RemovePullConfiguration -Verbose -Wait -Force
