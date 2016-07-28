@@ -98,6 +98,6 @@ $argumentList = "-NodeName 'localhost' -Key $key -Port $Port"
 Invoke-Expression "& `"$scriptPath`" $argumentList"
 
 Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force
-Start-Sleep -Seconds 15
+Start-Sleep -Seconds 8
 Start-DscConfiguration .\PullServerConfiguration -Verbose -Wait -Force
 
