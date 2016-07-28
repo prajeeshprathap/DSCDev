@@ -1,5 +1,3 @@
-
-
 [DSCLocalConfigurationManager()]
 configuration PullClientConfiguration
 {

@@ -10,6 +10,7 @@ $ErrorActionPreference = 'Stop'
 # Default the values
 $pullserverport = 8080
 $reportserverport = 9090
+$certificateThumbprint = [string]::Empty
 $key = [Guid]::NewGuid() | select -expand Guid
 
 
@@ -70,6 +71,11 @@ if ($packageParameters)
             throw "$key is not a valid Guid"
         }
     }
+
+    if ($arguments.ContainsKey("Thumbprint")) 
+    {
+        $certificateThumbprint = $arguments["Thumbprint"]
+    }
 } 
 
 if((Get-ExecutionPolicy) -eq 'Restricted')
@@ -101,7 +107,12 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 $currentFolder = Split-Path -parent $MyInvocation.MyCommand.Definition
 
 $scriptPath = Join-Path $currentFolder "InstallConfiguration.ps1"
-$argumentList = "-NodeName 'localhost' -Key $key -PullServerPort $pullserverport -ReportServerPort $reportserverport"
+if([string]::IsNullOrWhiteSpace($certificateThumbprint)){
+    $argumentList = "-NodeName 'localhost' -Key $key -PullServerPort $pullserverport -ReportServerPort $reportserverport"
+}
+else{
+    $argumentList = "-NodeName 'localhost' -Key $key -PullServerPort $pullserverport -ReportServerPort $reportserverport -Thumbprint $certificateThumbprint"
+}
 Invoke-Expression "& `"$scriptPath`" $argumentList"
 
 Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force

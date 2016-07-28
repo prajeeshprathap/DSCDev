@@ -12,7 +12,10 @@ param
 
     [Parameter(Mandatory)]
     [ValidateNotNull()]
-    [int] $ReportServerPort
+    [int] $ReportServerPort,
+
+    [Parameter(Mandatory=$false)]
+    [string] $Thumbprint
 )
 
 Configuration PullServerConfiguration
@@ -34,27 +37,55 @@ Configuration PullServerConfiguration
             Name   = 'DSC-Service'           
         } 
 
-        xDscWebService PullServer 
-        { 
-            Ensure                  = 'Present';
-            EndpointName            = 'PullServer';
-            Port                    = $Node.PullServerPort;
-            PhysicalPath            = "$env:SystemDrive\inetpub\PullServer";
-            CertificateThumbPrint   = 'AllowUnencryptedTraffic';
-            ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules";
-            ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration";
-            State                   = 'Started'
-            DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
-        }
-
-        xDscWebService ReportServer  
+        if([string]::IsNullOrWhiteSpace($Node.CertificateThumbPrint))
         {
-            Ensure                  = "Present" 
-            EndpointName            = "ReportServer" 
-            Port                    =  $Node.ReportServerPort
-            PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\ReportServer"
-            CertificateThumbPrint   = "AllowUnencryptedTraffic" 
-            State                   = "Started" 
+            xDscWebService PullServer 
+            { 
+                Ensure                  = 'Present';
+                EndpointName            = 'PullServer';
+                Port                    = $Node.PullServerPort;
+                PhysicalPath            = "$env:SystemDrive\inetpub\PullServer";
+                CertificateThumbPrint   = 'AllowUnencryptedTraffic';
+                ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules";
+                ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration";
+                State                   = 'Started'
+                DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
+            }
+
+            xDscWebService ReportServer  
+            {
+                Ensure                  = "Present" 
+                EndpointName            = "ReportServer" 
+                Port                    =  $Node.ReportServerPort
+                PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\ReportServer"
+                CertificateThumbPrint   = "AllowUnencryptedTraffic" 
+                State                   = "Started" 
+            }
+        }
+        else
+        {
+            xDscWebService PullServer 
+            { 
+                Ensure                  = 'Present';
+                EndpointName            = 'PullServer';
+                Port                    = $Node.PullServerPort;
+                PhysicalPath            = "$env:SystemDrive\inetpub\PullServer";
+                CertificateThumbPrint   = $Node.CertificateThumbPrint;
+                ModulePath              = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Modules";
+                ConfigurationPath       = "$env:PROGRAMFILES\WindowsPowerShell\DscService\Configuration";
+                State                   = 'Started'
+                DependsOn               = '[WindowsFeature]DSCServiceFeature'                         
+            }
+
+            xDscWebService ReportServer  
+            {
+                Ensure                  = "Present" 
+                EndpointName            = "ReportServer" 
+                Port                    =  $Node.ReportServerPort
+                PhysicalPath            = "$env:SystemDrive\inetpub\wwwroot\ReportServer"
+                CertificateThumbPrint   = $Node.CertificateThumbPrint;
+                State                   = "Started" 
+            }
         }
 
         File RegistrationKeyFile
@@ -73,6 +104,7 @@ $ConfigParameters = @{
                 NodeName = 'localhost'
                 PullServerPort = $PullServerPort
                 ReportServerPort = $ReportServerPort
+                CertificateThumbPrint = $Thumbprint
                 RegistrationKey = $Key
                 RebootNodeifNeeded = $true
             }
