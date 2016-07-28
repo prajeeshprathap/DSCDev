@@ -97,6 +97,7 @@ $scriptPath = Join-Path $currentFolder "InstallConfiguration.ps1"
 $argumentList = "-NodeName 'localhost' -Key $key -Port $Port"
 Invoke-Expression "& `"$scriptPath`" $argumentList"
 
-Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Wait -Force
+Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force
+Start-Sleep -Seconds 15
 Start-DscConfiguration .\PullServerConfiguration -Verbose -Wait -Force
 
