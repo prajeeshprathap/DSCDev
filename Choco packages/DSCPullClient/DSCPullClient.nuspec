@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DSC.PullClient</id>
+    <version>1.0.0</version>
+    <authors>Prajeesh Prathap</authors>
+    <owners>Prajeesh Prathap</owners>
+    <licenseUrl>http://www.infosuppot.com</licenseUrl>
+    <projectUrl>http://www.infosuppot.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Runs the configuration to create a DSC pull client</description>
+    <releaseNotes>Runs the configuration to create a DSC pull client</releaseNotes>
+    <copyright>(c) 2010-2016 Prajeesh Prathap, All rights reserved</copyright>
+    <tags>PowerShell DSC, DSC, PullClient, Desired State Configuration, PowerShell</tags>
+  </metadata>
+</package>
