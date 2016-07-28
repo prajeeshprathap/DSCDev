@@ -54,7 +54,11 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 }
 
 
-.\RemovePullConfiguration.ps1 -NodeName 'localhost' -Port $Port
+$currentFolder = Split-Path -parent $MyInvocation.MyCommand.Definition
 
-Start-DscConfiguration .\RemovePullConfiguration -Verbose -Force
+$scriptPath = Join-Path $currentFolder "UninstallConfiguration.ps1"
+$argumentList = "-NodeName 'localhost' -Port $Port"
+Invoke-Expression "& `"$scriptPath`" $argumentList"
+
+Start-DscConfiguration .\RemovePullConfiguration -Verbose -Wait -Force
 

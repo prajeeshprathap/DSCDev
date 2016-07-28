@@ -64,5 +64,4 @@ $ConfigParameters = @{
         )
     }
 
-
 PullServerConfiguration -ConfigurationData $ConfigParameters
