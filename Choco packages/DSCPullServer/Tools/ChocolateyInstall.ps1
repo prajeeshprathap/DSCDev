@@ -91,7 +91,7 @@ if(-not(Get-Module -Name xPSDesiredStateConfiguration -ListAvailable))
 "Registration key used for the pull server is $key" | Write-Host -ForegroundColor Cyan
 "This key will be used when you want to register pull clients to the machine" | Write-Host -ForegroundColor Cyan
 
-.\.\PullServerConfiguration.ps1 -NodeName 'localhost' -Key $key -Port $Port
+.\PullServerConfiguration.ps1 -NodeName 'localhost' -Key $key -Port $Port
 
 Set-DscLocalConfigurationManager -Path .\PullServerConfiguration -Verbose -Force
 Start-DscConfiguration .\PullServerConfiguration -Verbose -Force
